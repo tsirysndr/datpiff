@@ -1,8 +1,5 @@
-use std::time::Duration;
-
 use clap::{Arg, Command};
-use datpiff::{constants::BASE_URL, formater::format_results, parser::Parser};
-use surf::{Client, Config, Url};
+use datpiff::{formater::format_results, parser::Parser};
 
 fn cli() -> Command<'static> {
     const VERSION: &str = env!("CARGO_PKG_VERSION");
