@@ -26,7 +26,7 @@ Scrapes the datpiff website for the latest mixtapes"#,
         .subcommand(Command::new("exclusives").about("Get the latest exclusives"))
         .subcommand(Command::new("top").about("Get the top mixtapes of the month"))
         .subcommand(
-            Command::new("search").about("Search torrents").arg(
+            Command::new("search").about("Search mixtape").arg(
                 Arg::with_name("query")
                     .help("The query to search for")
                     .required(true)
