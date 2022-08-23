@@ -19,7 +19,7 @@ impl Parser {
             .unwrap();
         Self { client }
     }
-    pub async fn get_latest_mixtapes(self) -> Result<Vec<Mixtape>, surf::Error> {
+    pub async fn get_latest_mixtapes(&self) -> Result<Vec<Mixtape>, surf::Error> {
         let mut mixtapes: Vec<Mixtape> = Vec::new();
         let page = self.client.get("/").recv_string().await?;
         let document = Html::parse_document(&page);
@@ -53,7 +53,7 @@ impl Parser {
         Ok(mixtapes)
     }
 
-    pub async fn get_hot_mixtapes(self) -> Result<Vec<Mixtape>, surf::Error> {
+    pub async fn get_hot_mixtapes(&self) -> Result<Vec<Mixtape>, surf::Error> {
         let mut mixtapes: Vec<Mixtape> = Vec::new();
         let page = self.client.get("/").recv_string().await?;
         let document = Html::parse_document(&page);
@@ -87,7 +87,7 @@ impl Parser {
         Ok(mixtapes)
     }
 
-    pub async fn get_exclusive_mixtapes(self) -> Result<Vec<Mixtape>, surf::Error> {
+    pub async fn get_exclusive_mixtapes(&self) -> Result<Vec<Mixtape>, surf::Error> {
         let mut mixtapes: Vec<Mixtape> = Vec::new();
         let page = self.client.get("/").recv_string().await?;
         let document = Html::parse_document(&page);
@@ -122,7 +122,7 @@ impl Parser {
         Ok(mixtapes)
     }
 
-    pub async fn get_top_mixtapes(self) -> Result<Vec<Mixtape>, surf::Error> {
+    pub async fn get_top_mixtapes(&self) -> Result<Vec<Mixtape>, surf::Error> {
         let mut mixtapes: Vec<Mixtape> = Vec::new();
         let page = self.client.get("/").recv_string().await?;
         let document = Html::parse_document(&page);
@@ -156,7 +156,7 @@ impl Parser {
         Ok(mixtapes)
     }
 
-    pub async fn search_mixtapes(self, query: &str) -> Result<Vec<Mixtape>, surf::Error> {
+    pub async fn search_mixtapes(&self, query: &str) -> Result<Vec<Mixtape>, surf::Error> {
         let criteria = encode(query);
         let mut mixtapes: Vec<Mixtape> = Vec::new();
         let page = self
