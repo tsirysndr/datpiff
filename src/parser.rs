@@ -195,9 +195,3 @@ impl Parser {
         Ok(mixtapes)
     }
 }
-
-impl Default for Parser {
-    fn default() -> Self {
-        Self::new()
-    }
-}
