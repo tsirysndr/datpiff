@@ -1,12 +1,15 @@
 [package]
 name = "datpiff"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2021"
 description = "Rust library for DatPiff"
 documentation = "https://docs.rs/datpiff"
 readme = "README.md"
 repository = "https://github.com/tsirysndr/datpiff"
 license = "MIT"
+authors = ["Tsiry Sandratraina <tsiry.sndr@aol.com>"]
+categories = ["command-line-utilities"]
+keywords = ["tokio", "mixtapes", "cli"]
 
 [lib]
 doctest = false
