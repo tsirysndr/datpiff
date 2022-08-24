@@ -2,6 +2,8 @@
 
 DatPiff CLI helps you browse [DatPiff](https://www.datpiff.com/) mixtapes right from the terminal.
 
+[![asciicast](https://asciinema.org/a/Sm0WrYrk029OPyZ6B9K88rNRL.svg)](https://asciinema.org/a/Sm0WrYrk029OPyZ6B9K88rNRL)
+
 ## Installation
 
 Simply run:
