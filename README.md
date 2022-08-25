@@ -4,7 +4,7 @@
   <a href="https://crates.io/crates/datpiff" target="_blank">
     <img src="https://img.shields.io/crates/v/datpiff.svg" />
   </a>
-  <a href="https://docs.rs/kickasstorrent" target="_blank">
+  <a href="https://docs.rs/datpiff" target="_blank">
     <img src="https://docs.rs/datpiff/badge.svg" />
   </a>
   <a href="LICENSE" target="_blank">
