@@ -23,3 +23,24 @@ Simply run:
 ```bash
 $ cargo install datpiff
 ```
+
+## Usage
+
+```
+
+USAGE:
+    datpiff <SUBCOMMAND>
+
+OPTIONS:
+    -h, --help       Print help information
+    -V, --version    Print version information
+
+SUBCOMMANDS:
+    exclusives    Get the latest exclusives
+    help          Print this message or the help of the given subcommand(s)
+    hot           Get the hottest mixtapes
+    latest        Get the latest mixtapes
+    search        Search mixtape
+    top           Get the top mixtapes of the month
+
+```
