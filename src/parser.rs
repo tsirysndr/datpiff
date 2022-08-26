@@ -265,11 +265,7 @@ impl Parser {
             .to_string();
 
         return Some(Mixtape {
-            id: link.replace("/", "").replace(
-                ".html,
-            tracks: todo!(), ",
-                "",
-            ),
+            id: link.replace("/", "").replace(".html", ""),
             artist: artist.to_string(),
             title: title.to_string(),
             listens: listens.to_string(),
