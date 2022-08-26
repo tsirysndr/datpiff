@@ -33,6 +33,7 @@ impl Parser {
             }
             let artist = div.unwrap().text().collect::<Vec<_>>()[0];
             let title = a.unwrap().text().collect::<Vec<_>>()[0];
+
             let mut link = element
                 .select(&Selector::parse("a").unwrap())
                 .next()
@@ -42,12 +43,24 @@ impl Parser {
                 .unwrap()
                 .to_string();
             link.remove(0);
+
             let listens = span.unwrap().text().collect::<Vec<_>>()[0];
+
+            let cover = element
+                .select(&Selector::parse(r#"img[alt="Mixtape Cover"]"#).unwrap())
+                .next()
+                .unwrap()
+                .value()
+                .attr("src")
+                .unwrap()
+                .to_string();
             mixtapes.push(Mixtape {
+                id: link.replace("/", "").replace(".html", ""),
                 artist: artist.to_string(),
                 title: title.to_string(),
                 listens: listens.to_string(),
-                link: format!("{}{}", BASE_URL, link),
+                link: format!("{}/{}", BASE_URL, link),
+                cover: format!("http:{}", cover),
             })
         }
         Ok(mixtapes)
@@ -77,11 +90,23 @@ impl Parser {
                 .to_string();
             link.remove(0);
             let listens = span.unwrap().text().collect::<Vec<_>>()[0];
+
+            let cover = element
+                .select(&Selector::parse(r#"img[alt="Mixtape Cover"]"#).unwrap())
+                .next()
+                .unwrap()
+                .value()
+                .attr("src")
+                .unwrap()
+                .to_string();
+
             mixtapes.push(Mixtape {
+                id: link.replace("/", "").replace(".html", ""),
                 title: title.to_string(),
                 artist: artist.to_string(),
                 listens: listens.to_string(),
-                link: format!("{}{}", BASE_URL, link),
+                link: format!("{}/{}", BASE_URL, link),
+                cover: format!("http:{}", cover),
             })
         }
         Ok(mixtapes)
@@ -101,6 +126,7 @@ impl Parser {
             }
             let artist = div.unwrap().text().collect::<Vec<_>>()[0];
             let title = a.unwrap().text().collect::<Vec<_>>()[0];
+
             let mut link = element
                 .select(&Selector::parse("a").unwrap())
                 .next()
@@ -110,13 +136,25 @@ impl Parser {
                 .unwrap()
                 .to_string();
             link.remove(0);
+
             let listens = span.unwrap().text().collect::<Vec<_>>()[0];
 
+            let cover = element
+                .select(&Selector::parse(r#"img[alt="Mixtape Cover"]"#).unwrap())
+                .next()
+                .unwrap()
+                .value()
+                .attr("src")
+                .unwrap()
+                .to_string();
+
             mixtapes.push(Mixtape {
+                id: link.replace("/", "").replace(".html", ""),
                 title: title.to_string(),
                 artist: artist.to_string(),
                 listens: listens.to_string(),
-                link: format!("{}{}", BASE_URL, link),
+                link: format!("{}/{}", BASE_URL, link),
+                cover: format!("http:{}", cover),
             })
         }
         Ok(mixtapes)
@@ -136,6 +174,7 @@ impl Parser {
             }
             let artist = div.unwrap().text().collect::<Vec<_>>()[0];
             let title = a.unwrap().text().collect::<Vec<_>>()[0];
+
             let mut link = element
                 .select(&Selector::parse("a").unwrap())
                 .next()
@@ -145,12 +184,25 @@ impl Parser {
                 .unwrap()
                 .to_string();
             link.remove(0);
+
             let listens = span.unwrap().text().collect::<Vec<_>>()[0];
+
+            let cover = element
+                .select(&Selector::parse(r#"img[alt="Mixtape Cover"]"#).unwrap())
+                .next()
+                .unwrap()
+                .value()
+                .attr("src")
+                .unwrap()
+                .to_string();
+
             mixtapes.push(Mixtape {
+                id: link.replace("/", "").replace(".html", ""),
                 artist: artist.to_string(),
                 title: title.to_string(),
                 listens: listens.to_string(),
-                link: format!("{}{}", BASE_URL, link),
+                link: format!("{}/{}", BASE_URL, link),
+                cover: format!("http:{}", cover),
             })
         }
         Ok(mixtapes)
@@ -184,12 +236,25 @@ impl Parser {
                 .unwrap()
                 .to_string();
             link.remove(0);
+
             let listens = span.unwrap().text().collect::<Vec<_>>()[0];
+
+            let cover = element
+                .select(&Selector::parse(r#"img[alt="Mixtape Cover"]"#).unwrap())
+                .next()
+                .unwrap()
+                .value()
+                .attr("src")
+                .unwrap()
+                .to_string();
+
             mixtapes.push(Mixtape {
+                id: link.replace("/", "").replace(".html", ""),
                 title: title.to_string(),
                 artist: artist.to_string(),
                 listens: listens.to_string(),
-                link: format!("{}{}", BASE_URL, link),
+                link: format!("{}/{}", BASE_URL, link),
+                cover: format!("http:{}", cover),
             })
         }
         Ok(mixtapes)
