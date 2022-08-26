@@ -1,6 +1,6 @@
 [package]
 name = "datpiff"
-version = "0.1.9"
+version = "0.1.10"
 edition = "2021"
 description = "Rust library for DatPiff"
 documentation = "https://docs.rs/datpiff"

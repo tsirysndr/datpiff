@@ -142,6 +142,7 @@ impl Parser {
             dj: details.dj,
             listens: details.listens,
             cover: details.cover,
+            cover_back: details.cover_back,
         })
     }
 
@@ -171,6 +172,7 @@ impl Parser {
             title: "".to_string(),
             dj: "".to_string(),
             cover: "".to_string(),
+            cover_back: "".to_string(),
             listens: "".to_string(),
             tracks: Vec::new(),
         }
@@ -222,11 +224,20 @@ impl Parser {
             .attr("data-front")
             .unwrap()
             .to_string();
+        let cover_back = document
+            .select(&Selector::parse(".tapeBG").unwrap())
+            .next()
+            .unwrap()
+            .value()
+            .attr("data-back")
+            .unwrap()
+            .to_string();
         MixtapeDetails {
             tracks: Vec::new(),
             uploader: String::new(),
             added_at: String::new(),
             cover,
+            cover_back,
             artist,
             title,
             dj,
@@ -270,7 +281,7 @@ impl Parser {
             title: title.to_string(),
             listens: listens.to_string(),
             link: format!("{}/{}", BASE_URL, link),
-            cover: format!("http:{}", cover),
+            cover: format!("http:{}", cover.replace("http:", "")),
         });
     }
 }
