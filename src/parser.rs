@@ -1,6 +1,6 @@
 use std::time::Duration;
 
-use scraper::{Html, Selector};
+use scraper::{ElementRef, Html, Selector};
 use surf::{Client, Config, Url};
 use urlencoding::encode;
 
@@ -25,43 +25,13 @@ impl Parser {
         let document = Html::parse_document(&page);
         let selector = Selector::parse(".contentItemInner").unwrap();
         for (i, element) in document.select(&selector).enumerate() {
-            let div = element.select(&Selector::parse(".artist").unwrap()).next();
-            let a = element.select(&Selector::parse(".title").unwrap()).next();
-            let span = element.select(&Selector::parse("span").unwrap()).next();
-            if div == None || a == None || i > 7 {
+            if i > 7 {
                 continue;
             }
-            let artist = div.unwrap().text().collect::<Vec<_>>()[0];
-            let title = a.unwrap().text().collect::<Vec<_>>()[0];
-
-            let mut link = element
-                .select(&Selector::parse("a").unwrap())
-                .next()
-                .unwrap()
-                .value()
-                .attr("href")
-                .unwrap()
-                .to_string();
-            link.remove(0);
-
-            let listens = span.unwrap().text().collect::<Vec<_>>()[0];
-
-            let cover = element
-                .select(&Selector::parse(r#"img[alt="Mixtape Cover"]"#).unwrap())
-                .next()
-                .unwrap()
-                .value()
-                .attr("src")
-                .unwrap()
-                .to_string();
-            mixtapes.push(Mixtape {
-                id: link.replace("/", "").replace(".html", ""),
-                artist: artist.to_string(),
-                title: title.to_string(),
-                listens: listens.to_string(),
-                link: format!("{}/{}", BASE_URL, link),
-                cover: format!("http:{}", cover),
-            })
+            let mixtape = self.parse_mixtape(&element);
+            if mixtape.is_some() {
+                mixtapes.push(mixtape.unwrap());
+            }
         }
         Ok(mixtapes)
     }
@@ -72,42 +42,13 @@ impl Parser {
         let document = Html::parse_document(&page);
         let selector = Selector::parse(".contentItemInner").unwrap();
         for (i, element) in document.select(&selector).enumerate() {
-            let div = element.select(&Selector::parse(".artist").unwrap()).next();
-            let a = element.select(&Selector::parse(".title").unwrap()).next();
-            let span = element.select(&Selector::parse("span").unwrap()).next();
-            if div == None || a == None || i < 8 || i > 15 {
+            if i < 8 || i > 15 {
                 continue;
             }
-            let artist = div.unwrap().text().collect::<Vec<_>>()[0];
-            let title = a.unwrap().text().collect::<Vec<_>>()[0];
-            let mut link = element
-                .select(&Selector::parse("a").unwrap())
-                .next()
-                .unwrap()
-                .value()
-                .attr("href")
-                .unwrap()
-                .to_string();
-            link.remove(0);
-            let listens = span.unwrap().text().collect::<Vec<_>>()[0];
-
-            let cover = element
-                .select(&Selector::parse(r#"img[alt="Mixtape Cover"]"#).unwrap())
-                .next()
-                .unwrap()
-                .value()
-                .attr("src")
-                .unwrap()
-                .to_string();
-
-            mixtapes.push(Mixtape {
-                id: link.replace("/", "").replace(".html", ""),
-                title: title.to_string(),
-                artist: artist.to_string(),
-                listens: listens.to_string(),
-                link: format!("{}/{}", BASE_URL, link),
-                cover: format!("http:{}", cover),
-            })
+            let mixtape = self.parse_mixtape(&element);
+            if mixtape.is_some() {
+                mixtapes.push(mixtape.unwrap());
+            }
         }
         Ok(mixtapes)
     }
@@ -118,44 +59,13 @@ impl Parser {
         let document = Html::parse_document(&page);
         let selector = Selector::parse(".contentItemInner").unwrap();
         for (i, element) in document.select(&selector).enumerate() {
-            let div = element.select(&Selector::parse(".artist").unwrap()).next();
-            let a = element.select(&Selector::parse(".title").unwrap()).next();
-            let span = element.select(&Selector::parse("span").unwrap()).next();
-            if div == None || a == None || i < 16 || i > 19 {
+            if i < 16 || i > 19 {
                 continue;
             }
-            let artist = div.unwrap().text().collect::<Vec<_>>()[0];
-            let title = a.unwrap().text().collect::<Vec<_>>()[0];
-
-            let mut link = element
-                .select(&Selector::parse("a").unwrap())
-                .next()
-                .unwrap()
-                .value()
-                .attr("href")
-                .unwrap()
-                .to_string();
-            link.remove(0);
-
-            let listens = span.unwrap().text().collect::<Vec<_>>()[0];
-
-            let cover = element
-                .select(&Selector::parse(r#"img[alt="Mixtape Cover"]"#).unwrap())
-                .next()
-                .unwrap()
-                .value()
-                .attr("src")
-                .unwrap()
-                .to_string();
-
-            mixtapes.push(Mixtape {
-                id: link.replace("/", "").replace(".html", ""),
-                title: title.to_string(),
-                artist: artist.to_string(),
-                listens: listens.to_string(),
-                link: format!("{}/{}", BASE_URL, link),
-                cover: format!("http:{}", cover),
-            })
+            let mixtape = self.parse_mixtape(&element);
+            if mixtape.is_some() {
+                mixtapes.push(mixtape.unwrap());
+            }
         }
         Ok(mixtapes)
     }
@@ -166,44 +76,13 @@ impl Parser {
         let document = Html::parse_document(&page);
         let selector = Selector::parse(".contentItemInner").unwrap();
         for (i, element) in document.select(&selector).enumerate() {
-            let div = element.select(&Selector::parse(".artist").unwrap()).next();
-            let a = element.select(&Selector::parse(".title").unwrap()).next();
-            let span = element.select(&Selector::parse("span").unwrap()).next();
-            if div == None || a == None || i < 28 {
+            if i < 28 {
                 continue;
             }
-            let artist = div.unwrap().text().collect::<Vec<_>>()[0];
-            let title = a.unwrap().text().collect::<Vec<_>>()[0];
-
-            let mut link = element
-                .select(&Selector::parse("a").unwrap())
-                .next()
-                .unwrap()
-                .value()
-                .attr("href")
-                .unwrap()
-                .to_string();
-            link.remove(0);
-
-            let listens = span.unwrap().text().collect::<Vec<_>>()[0];
-
-            let cover = element
-                .select(&Selector::parse(r#"img[alt="Mixtape Cover"]"#).unwrap())
-                .next()
-                .unwrap()
-                .value()
-                .attr("src")
-                .unwrap()
-                .to_string();
-
-            mixtapes.push(Mixtape {
-                id: link.replace("/", "").replace(".html", ""),
-                artist: artist.to_string(),
-                title: title.to_string(),
-                listens: listens.to_string(),
-                link: format!("{}/{}", BASE_URL, link),
-                cover: format!("http:{}", cover),
-            })
+            let mixtape = self.parse_mixtape(&element);
+            if mixtape.is_some() {
+                mixtapes.push(mixtape.unwrap());
+            }
         }
         Ok(mixtapes)
     }
@@ -219,44 +98,51 @@ impl Parser {
         let document = Html::parse_document(&page);
         let selector = Selector::parse(".contentItemInner").unwrap();
         for element in document.select(&selector) {
-            let div = element.select(&Selector::parse(".artist").unwrap()).next();
-            let a = element.select(&Selector::parse(".title").unwrap()).next();
-            let span = element.select(&Selector::parse("span").unwrap()).next();
-            if div == None || a == None {
-                continue;
+            let mixtape = self.parse_mixtape(&element);
+            if mixtape.is_some() {
+                mixtapes.push(mixtape.unwrap());
             }
-            let artist = div.unwrap().text().collect::<Vec<_>>()[0];
-            let title = a.unwrap().text().collect::<Vec<_>>()[0];
-            let mut link = element
-                .select(&Selector::parse("a").unwrap())
-                .next()
-                .unwrap()
-                .value()
-                .attr("href")
-                .unwrap()
-                .to_string();
-            link.remove(0);
-
-            let listens = span.unwrap().text().collect::<Vec<_>>()[0];
-
-            let cover = element
-                .select(&Selector::parse(r#"img[alt="Mixtape Cover"]"#).unwrap())
-                .next()
-                .unwrap()
-                .value()
-                .attr("src")
-                .unwrap()
-                .to_string();
-
-            mixtapes.push(Mixtape {
-                id: link.replace("/", "").replace(".html", ""),
-                title: title.to_string(),
-                artist: artist.to_string(),
-                listens: listens.to_string(),
-                link: format!("{}/{}", BASE_URL, link),
-                cover: format!("http:{}", cover),
-            })
         }
         Ok(mixtapes)
+    }
+
+    fn parse_mixtape(&self, element: &ElementRef) -> Option<Mixtape> {
+        let div = element.select(&Selector::parse(".artist").unwrap()).next();
+        let a = element.select(&Selector::parse(".title").unwrap()).next();
+        let span = element.select(&Selector::parse("span").unwrap()).next();
+        if div == None || a == None {
+            return None;
+        }
+        let artist = div.unwrap().text().collect::<Vec<_>>()[0];
+        let title = a.unwrap().text().collect::<Vec<_>>()[0];
+        let mut link = element
+            .select(&Selector::parse("a").unwrap())
+            .next()
+            .unwrap()
+            .value()
+            .attr("href")
+            .unwrap()
+            .to_string();
+        link.remove(0);
+
+        let listens = span.unwrap().text().collect::<Vec<_>>()[0];
+
+        let cover = element
+            .select(&Selector::parse(r#"img[alt="Mixtape Cover"]"#).unwrap())
+            .next()
+            .unwrap()
+            .value()
+            .attr("src")
+            .unwrap()
+            .to_string();
+
+        return Some(Mixtape {
+            id: link.replace("/", "").replace(".html", ""),
+            artist: artist.to_string(),
+            title: title.to_string(),
+            listens: listens.to_string(),
+            link: format!("{}/{}", BASE_URL, link),
+            cover: format!("http:{}", cover),
+        });
     }
 }
