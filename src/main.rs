@@ -1,4 +1,5 @@
 use clap::{Arg, Command};
+use colored_json::ToColoredJson;
 use datpiff::{formater::format_results, parser::Parser};
 
 fn cli() -> Command<'static> {
@@ -33,6 +34,16 @@ Scrapes the datpiff website for the latest mixtapes"#,
                     .index(1),
             ),
         )
+        .subcommand(
+            Command::new("info")
+                .about("Show details about a mixtape")
+                .arg(
+                    Arg::with_name("id")
+                        .help("The id of the mixtape")
+                        .required(true)
+                        .index(1),
+                ),
+        )
 }
 
 #[tokio::main]
@@ -50,6 +61,18 @@ async fn main() -> Result<(), surf::Error> {
                 .await?,
         ),
         Some(("top", _)) => format_results(parser.get_top_mixtapes().await?),
+        Some(("info", sub_matches)) => {
+            let mixtape = parser
+                .get_mixtape(sub_matches.get_one::<String>("id").unwrap())
+                .await?;
+            println!(
+                "{}",
+                serde_json::to_string(&mixtape)
+                    .unwrap()
+                    .to_colored_json_auto()
+                    .unwrap()
+            );
+        }
         _ => unreachable!("Exhausted list of subcommands and subcommand_required prevents `None`"),
     };
 

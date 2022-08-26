@@ -9,3 +9,14 @@ pub struct Mixtape {
     pub link: String,
     pub cover: String,
 }
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct MixtapeDetails {
+    pub tracks: Vec<String>,
+    pub uploader: String,
+    pub added_at: String,
+    pub title: String,
+    pub artist: String,
+    pub listens: String,
+    pub dj: String,
+}
