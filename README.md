@@ -39,6 +39,7 @@ SUBCOMMANDS:
     exclusives    Get the latest exclusives
     help          Print this message or the help of the given subcommand(s)
     hot           Get the hottest mixtapes
+    info          Show details about a mixtape
     latest        Get the latest mixtapes
     search        Search mixtape
     top           Get the top mixtapes of the month
