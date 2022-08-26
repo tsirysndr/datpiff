@@ -19,4 +19,5 @@ pub struct MixtapeDetails {
     pub artist: String,
     pub listens: String,
     pub dj: String,
+    pub cover: String,
 }

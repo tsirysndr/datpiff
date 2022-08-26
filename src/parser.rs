@@ -141,6 +141,7 @@ impl Parser {
             title: details.title,
             dj: details.dj,
             listens: details.listens,
+            cover: details.cover,
         })
     }
 
@@ -169,6 +170,7 @@ impl Parser {
             artist: "".to_string(),
             title: "".to_string(),
             dj: "".to_string(),
+            cover: "".to_string(),
             listens: "".to_string(),
             tracks: Vec::new(),
         }
@@ -212,10 +214,19 @@ impl Parser {
             .next()
             .unwrap()
             .to_string();
+        let cover = document
+            .select(&Selector::parse(".tapeBG").unwrap())
+            .next()
+            .unwrap()
+            .value()
+            .attr("data-front")
+            .unwrap()
+            .to_string();
         MixtapeDetails {
             tracks: Vec::new(),
             uploader: String::new(),
             added_at: String::new(),
+            cover,
             artist,
             title,
             dj,
