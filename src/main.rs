@@ -1,4 +1,4 @@
-use clap::{Arg, Command};
+use clap::{arg, Arg, Command};
 use colored_json::ToColoredJson;
 use datpiff::{formater::format_results, parser::Parser};
 
@@ -44,6 +44,7 @@ Scrapes the datpiff website for the latest mixtapes"#,
                         .index(1),
                 ),
         )
+        .arg(arg!(-j --json ... "Output results in json format").required(false))
 }
 
 #[tokio::main]
@@ -51,16 +52,19 @@ async fn main() -> Result<(), surf::Error> {
     let matches = cli().get_matches();
     let parser = Parser::new();
 
+    let json = matches.is_present("json");
+
     match matches.subcommand() {
-        Some(("exclusives", _)) => format_results(parser.get_exclusive_mixtapes().await?),
-        Some(("hot", _)) => format_results(parser.get_hot_mixtapes().await?),
-        Some(("latest", _)) => format_results(parser.get_latest_mixtapes().await?),
+        Some(("exclusives", _)) => format_results(parser.get_exclusive_mixtapes().await?, json),
+        Some(("hot", _)) => format_results(parser.get_hot_mixtapes().await?, json),
+        Some(("latest", _)) => format_results(parser.get_latest_mixtapes().await?, json),
         Some(("search", sub_matches)) => format_results(
             parser
                 .search_mixtapes(sub_matches.get_one::<String>("query").unwrap())
                 .await?,
+            json,
         ),
-        Some(("top", _)) => format_results(parser.get_top_mixtapes().await?),
+        Some(("top", _)) => format_results(parser.get_top_mixtapes().await?, json),
         Some(("info", sub_matches)) => {
             let mixtape = parser
                 .get_mixtape(sub_matches.get_one::<String>("id").unwrap())

@@ -1,12 +1,16 @@
 use serde::{Deserialize, Serialize};
+use tabled::Tabled;
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Tabled)]
 pub struct Mixtape {
     pub id: String,
     pub artist: String,
+    #[tabled(skip)]
     pub title: String,
     pub listens: String,
+    #[tabled(skip)]
     pub link: String,
+    #[tabled(skip)]
     pub cover: String,
 }
 
