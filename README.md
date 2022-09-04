@@ -21,6 +21,8 @@
   </a>
 </p>
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/S6S1ETN14)
+
 DatPiff CLI helps you browse [DatPiff](https://www.datpiff.com/) mixtapes right from the terminal.
 
 <img width="800" src="https://cdn.jsdelivr.net/gh/tsirysndr/datpiff@master/datpiff-preview.svg">
