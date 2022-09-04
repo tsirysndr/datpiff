@@ -16,6 +16,9 @@
   <a href="https://github.com/tsirysndr/datpiff/actions/workflows/release.yml" target="_blank">
     <img alt="License: MIT" src="https://github.com/tsirysndr/datpiff/actions/workflows/release.yml/badge.svg" />
   </a>
+  <a href="https://github.com/tsirysndr/datpiff/actions/workflows/rust-clippy.yml" target="_blank">
+    <img alt="release" src="https://github.com/tsirysndr/datpiff/actions/workflows/rust-clippy.yml/badge.svg?branch=master" />
+  </a>
 </p>
 
 DatPiff CLI helps you browse [DatPiff](https://www.datpiff.com/) mixtapes right from the terminal.
