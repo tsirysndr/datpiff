@@ -39,6 +39,12 @@ Simply run:
 $ cargo install datpiff
 ```
 
+### macOS/Linux
+
+```bash
+$ brew install tsirysndr/tap/datpiff
+```
+
 Or download the latest release for your platform from [here](https://github.com/tsirysndr/datpiff/releases).
 
 ## Usage
